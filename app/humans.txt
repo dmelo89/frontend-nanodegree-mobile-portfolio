@@ -3,11 +3,7 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
-
-# THANKS
-
-  <name>
+  Daniel M. Melo -- Front-End Developer -- twitter.com/dmelo89
 
 # TECHNOLOGY COLOPHON
 
