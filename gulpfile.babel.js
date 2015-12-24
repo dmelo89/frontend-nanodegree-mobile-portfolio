@@ -35,26 +35,30 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import {output as pagespeed} from 'psi';
 import pkg from './package.json';
 
+var minifyHTML = require('gulp-minify-html');
+var build = require('gulp-build');
+ 
+
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 // Lint JavaScript
-gulp.task('lint', () =>
-  gulp.src('app/scripts/**/*.js')
-    .pipe($.eslint())
-    .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
-);
+//gulp.task('lint', () =>
+//  gulp.src('app/js/**/*.js')
+//    .pipe($.eslint())
+//    .pipe($.eslint.format())
+//    .pipe($.if(!browserSync.active, $.eslint.failOnError()))
+//);
 
 // Optimize images
 gulp.task('images', () =>
-  gulp.src('app/images/**/*')
+  gulp.src('app/img/**/*')
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true
     })))
-    .pipe(gulp.dest('dist/images'))
-    .pipe($.size({title: 'images'}))
+    .pipe(gulp.dest('dist/img'))
+    .pipe($.size({title: 'img'}))
 );
 
 // Copy all files at the root level (app)
@@ -85,21 +89,21 @@ gulp.task('styles', () => {
 
   // For best performance, don't add Sass partials to `gulp.src`
   return gulp.src([
-    'app/styles/**/*.scss',
-    'app/styles/**/*.css'
+    'app/css/**/*.scss',
+    'app/css/**/*.css'
   ])
-    .pipe($.newer('.tmp/styles'))
+    .pipe($.newer('.tmp/css'))
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       precision: 10
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-    .pipe(gulp.dest('.tmp/styles'))
+    .pipe(gulp.dest('.tmp/css'))
     // Concatenate and minify styles
     .pipe($.if('*.css', $.minifyCss()))
-    .pipe($.size({title: 'styles'}))
+    .pipe($.size({title: 'css'}))
     .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest('dist/styles'));
+    .pipe(gulp.dest('dist/css'));
 });
 
 // Concatenate and minify JavaScript. Optionally transpiles ES2015 code to ES5.
@@ -110,20 +114,21 @@ gulp.task('scripts', () =>
       // Note: Since we are not using useref in the scripts build pipeline,
       //       you need to explicitly list your scripts here in the right order
       //       to be correctly concatenated
-      './app/scripts/main.js'
+      './app/js/main.js',
+      './app/js/perfmatters.js'
       // Other scripts
     ])
-      .pipe($.newer('.tmp/scripts'))
+      .pipe($.newer('.tmp/js'))
       .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.sourcemaps.write())
-      .pipe(gulp.dest('.tmp/scripts'))
+      .pipe(gulp.dest('.tmp/js'))
       .pipe($.concat('main.min.js'))
       .pipe($.uglify({preserveComments: 'some'}))
       // Output files
-      .pipe($.size({title: 'scripts'}))
+      .pipe($.size({title: 'js'}))
       .pipe($.sourcemaps.write('.'))
-      .pipe(gulp.dest('dist/scripts'))
+      .pipe(gulp.dest('dist/js'))
 );
 
 // Scan your HTML for assets & optimize them
@@ -131,12 +136,17 @@ gulp.task('html', () => {
   return gulp.src('app/**/*.html')
     .pipe($.useref({searchPath: '{.tmp,app}'}))
     // Remove any unused CSS
+    // Note: If not using the Style Guide, you can delete it from
+    //       the next line to only include styles your project uses.
     .pipe($.if('*.css', $.uncss({
       html: [
         'app/index.html'
       ],
       // CSS Selectors for UnCSS to ignore
-      ignore: []
+      ignore: [
+        /.navdrawer-container.open/,
+        /.app-bar.open/
+      ]
     })))
 
     // Concatenate and minify styles
@@ -150,11 +160,19 @@ gulp.task('html', () => {
     .pipe(gulp.dest('dist'));
 });
 
+
+gulp.task('minify-html', function() {
+  return gulp.src('src/*.html')
+    .pipe(minifyHTML({ empty: true }))
+    .pipe(gulp.dest('dist'));
+});
+
+
 // Clean output directory
 gulp.task('clean', cb => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'styles'], () => {
+gulp.task('serve', ['default'], () => {
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -171,7 +189,7 @@ gulp.task('serve', ['scripts', 'styles'], () => {
 
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts']);
+  gulp.watch(['app/scripts/**/*.js'], ['scripts']);
   gulp.watch(['app/images/**/*'], reload);
 });
 
@@ -195,16 +213,22 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], cb =>
   runSequence(
     'styles',
-    ['lint', 'html', 'scripts', 'images', 'copy'],
+    ['html', 'scripts', 'images', 'copy'],
     'generate-service-worker',
     cb
   )
 );
 
+gulp.task('build', function() {
+  gulp.src('scripts/*.js')
+      .pipe(build({ GA_ID: '123456' }))
+      .pipe(gulp.dest('dist'))
+});
+
 // Run PageSpeed Insights
 gulp.task('pagespeed', cb =>
   // Update the below URL to the public URL of your site
-  pagespeed('example.com', {
+  pagespeed('danielmmelo.com/p4', {
     strategy: 'mobile'
     // By default we use the PageSpeed Insights free (no API key) tier.
     // Use a Google Developer API key if you have one: http://goo.gl/RkN0vE
@@ -247,6 +271,7 @@ gulp.task('generate-service-worker', ['copy-sw-scripts'], () => {
   });
 });
 
+
+
 // Load custom tasks from the `tasks` directory
-// Run: `npm install --save-dev require-dir` from the command-line
 // try { require('require-dir')('tasks'); } catch (err) { console.error(err); }

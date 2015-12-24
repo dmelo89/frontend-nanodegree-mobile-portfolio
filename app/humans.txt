@@ -3,7 +3,11 @@
 
 # TEAM
 
-  Daniel M. Melo -- Front-End Developer -- twitter.com/dmelo89
+  Daniel M. Melo -- Developer -- @dmelo89
+
+# THANKS
+
+  Udacity Team
 
 # TECHNOLOGY COLOPHON
 
