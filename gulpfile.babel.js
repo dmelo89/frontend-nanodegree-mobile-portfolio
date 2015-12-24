@@ -36,7 +36,6 @@ import {output as pagespeed} from 'psi';
 import pkg from './package.json';
 
 var minifyHTML = require('gulp-minify-html');
-var build = require('gulp-build');
  
 
 const $ = gulpLoadPlugins();
@@ -65,6 +64,7 @@ gulp.task('images', () =>
 gulp.task('copy', () =>
   gulp.src([
     'app/*',
+    'app/**/*',
     '!app/*.html',
     'node_modules/apache-server-configs/dist/.htaccess'
   ], {
@@ -188,16 +188,16 @@ gulp.task('serve', ['default'], () => {
   });
 
   gulp.watch(['app/**/*.html'], reload);
-  gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['scripts']);
-  gulp.watch(['app/images/**/*'], reload);
+  gulp.watch(['app/css/**/*.{scss,css}'], ['styles', reload]);
+  gulp.watch(['app/js/**/*.js'], ['scripts']);
+  gulp.watch(['app/img/**/*'], reload);
 });
 
 // Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], () =>
   browserSync({
     notify: false,
-    logPrefix: 'WSK',
+    logPrefix: 'FENMP',
     // Allow scroll syncing across breakpoints
     scrollElementMapping: ['main', '.mdl-layout'],
     // Run as an https by uncommenting 'https: true'
@@ -218,12 +218,6 @@ gulp.task('default', ['clean'], cb =>
     cb
   )
 );
-
-gulp.task('build', function() {
-  gulp.src('scripts/*.js')
-      .pipe(build({ GA_ID: '123456' }))
-      .pipe(gulp.dest('dist'))
-});
 
 // Run PageSpeed Insights
 gulp.task('pagespeed', cb =>
@@ -261,9 +255,9 @@ gulp.task('generate-service-worker', ['copy-sw-scripts'], () => {
     ],
     staticFileGlobs: [
       // Add/remove glob patterns to match your directory setup.
-      `${rootDir}/images/**/*`,
-      `${rootDir}/scripts/**/*.js`,
-      `${rootDir}/styles/**/*.css`,
+      `${rootDir}/img/**/*`,
+      `${rootDir}/js/**/*.js`,
+      `${rootDir}/css/**/*.css`,
       `${rootDir}/*.{html,json}`
     ],
     // Translates a static file path to the relative URL that it's served from.
