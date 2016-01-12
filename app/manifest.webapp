@@ -3,9 +3,6 @@
   "name": "Front-End Nanodegree Mobile Portfolio",
   "launch_path": "/index.html",
   "description": "A front-end nanodegree project on performance optimization.",
-  "icons": {
-    "128": "/img/touch/icon-128x128.png"
-  },
   "developer": {
     "name": "Daniel M. Melo",
     "url": "http://twitter.com/dmelo89/"

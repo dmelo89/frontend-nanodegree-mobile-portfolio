@@ -58,6 +58,7 @@ gulp.task('copy', () =>
   gulp.src([
     'app/*',
     'app/**/*',
+    'app/img/**/*',
     '!app/*.html',
     'node_modules/apache-server-configs/dist/.htaccess'
   ], {
@@ -198,7 +199,7 @@ gulp.task('serve:dist', ['default'], () =>
     //       will present a certificate warning in the browser.
     // https: true,
     server: 'dist',
-    port: 3001
+    port: 3150
   })
 );
 
