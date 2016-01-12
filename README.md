@@ -31,6 +31,6 @@ Use the `app` directory for editing any code, and then use `gulp serve:dist` com
 
 * Optimized all images from the portfolio and pizza website for faster rendering without losing quality;
 * Optimized navigation buttons in the 'pizza' page for better DOM building ("<form>" and "<input>" to "<a>" tags);
-* Used the Kit's .htaccess to activate module that makes performance better (mod_deflate);
+* Used the apache-server-configs's .htaccess to activate module that makes performance better (mod_deflate);
 * Optimized CSS rendering to get a 98/100 score in PageSpeed;
 * Removed performance JavaScripts that are not meant to be in the production enviroment.
