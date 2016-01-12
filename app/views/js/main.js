@@ -407,7 +407,7 @@ var resizePizzas = function(size) {
         document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.getElementById("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -435,7 +435,7 @@ var resizePizzas = function(size) {
           console.log("bug in sizeSwitcher");
       }
       // Here I removed unecessary style calculations and just applyed the style with the new variable.
-  	var randomPizzas = document.getElementsByClassName(".randomPizzaContainer");
+  	var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
     for (var i = 0; i < randomPizzas.length; i++) {
       randomPizzas[i].style.width = newwidth + "%";
     }
@@ -465,6 +465,7 @@ for (var i = 2; i < 40; i++) {
 // window.performance.measure("measure_pizza_generation", "mark_start_generating", "mark_end_generating");
 // var timeToGenerate = window.performance.getEntriesByName("measure_pizza_generation");
 // console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "ms");
+// Removed
 // Only makes sense for me, not for the user.
 
 
