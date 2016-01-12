@@ -10,11 +10,7 @@
 body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   background: black;
-}
-
-input {
-  background: grey;
-  font-size: 18px;
+  background-color: #ffe6c7;
 }
 
 form {
@@ -29,15 +25,10 @@ form {
   font-weight: 800;
 }
 
-.mover {
-  position: fixed;
-  width: 256px;
-  z-index: -1;
-}
-
 .randomPizzaContainer {
   float: left;
   display: flex;
+  width: 33.33%;
 }
 
 .randomPizzaContainer:after {
@@ -46,6 +37,24 @@ form {
   clear:both;
 }
 
- .container {
-  background-color: rgba(240, 60, 60, 0.8);
+#randomPizzas {
+  text-transform: capitalize;
+}
+
+.nav-link {
+  border: 1px solid #ac0000;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 10px;
+  color: #ac0000;
+}
+
+.nav-link:hover {
+  background: #ac0000;
+  color: #ffe6c7;
+}
+
+#menu { 
+  max-width: 434px;
+  margin: 0 auto;
 }

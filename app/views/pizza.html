@@ -8,35 +8,25 @@
 <body>
   <div class="container">
     <div id="header" class="row">
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-12">
-            <h1>Cam's Pizzeria</h1>
-            <div class="row">
-              <div id="menu" class="col-md-12">
-                <form action="#randomPizzas">
-                  <input type="submit" value="Menu">
-                </form>
-                <form action="#ingredients">
-                  <input type="submit" value="Our Ingredients">
-                </form>
-                <form action="#locations">
-                  <input type="submit" value="Locations">
-                </form>
-                <form action="#" onsubmit="alert('Thanks for clicking! This button doesn\'t do anything because this is a fake pizzeria :\)')">
-                  <input type="submit" value="Contact Us">
-                </form>
-              </div>
-            </div>
+        <div class="col-md-12">
+            <h1 class="centered">Cam's Pizzeria</h1>
+            <div id="menu" class="row"> <!-- Removed unecessary div -->
+              <!-- Removed form elements from the menu. They are bad for the Critical Rendering Path and were non sense -->
+                <a class="nav-link" href="#randomPizzas">Menu</a>
+                <a class="nav-link" href="#ingredients">Our Ingredients</a>
+                <a class="nav-link" href="#locations">Locations</a>
+                <a class="nav-link" href="#" onclick="alert('This button doesn\'t do anything because this is a fake pizzeria!')">
+                  Contact Us
+                </a>
+              <hr>
           </div>
-        </div>
       </div>
-      <div id="movingPizzas1" class="col-md-6">
-      </div>
+      <!-- removed unecessary div as I removed the script that showed them -->
     </div>
     <div id="callToAction" class="row">
       <div class="col-md-4">
-        <img src="images/pizzeria.jpg" class="img-responsive"> <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG -->
+        <img src="images/pizzeria.jpg" class="img-responsive"> <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG 
+        I optmized this image and make it smaller. -->
       </div>
       <div class="col-md-8">
         <div class="row">
@@ -49,9 +39,7 @@
         </div>
         <div class="row">
           <div class="col-md-6 col-md-push-3">
-            <form action="#randomPizzas">
-              <input type="submit" value="Pick a Pizza Now!">
-            </form>
+            <a class="nav-link" href="#randomPizzas">Pick a Pizza Now!</a>
           </div>
         </div>
       </div>
@@ -76,13 +64,13 @@
     </div>
     <div id="locations" class="row">
       <div class="col-md-12">
-        <h2 style="text-align: center">Locations!</h2>
+        <h2 class="centered">Locations!</h2>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4 col-md-offset-2">
             <h3>Pizza Road</h3>
             <p>1800 Pizza Road<br>San Francisco, CA<br>01010<br>555-555-5555</p>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4 col-md-offset-2">
             <h3>Classic Pie Way</h3>
             <p>999 Classic Pie Way<br>New York, NY<br>00100<br>555-555-5555</p>
           </div>
@@ -91,7 +79,7 @@
     </div>
     <div id="pizzaGenerator" class="row">
       <div class="col-md-12">
-        <h2 style="text-align: center">Our Pizzas!</h2>
+        <h2 class="centered">Our Pizzas!</h2>
         <div class="row">
           <div class="col-md-12">
             <em>What size pizza would you like? Use the slider below to change pizza sizes.</em>
@@ -102,7 +90,7 @@
           </div>
         </div>
         <div id="randomPizzas" class="row">
-          <div id="pizza0" class="randomPizzaContainer" style="width:33.33%;">
+          <div id="pizza0" class="randomPizzaContainer"> <!-- Removed all style calculations that are in the HTML -->
             <div class="col-md-6">
               <img src="images/pizza.png" class="img-responsive">
             </div>
@@ -135,7 +123,7 @@
         </div>
       </div>
     </div>
-    <div id="footer" class="col-md-12">Thanks for visiting! &copy; 2014 Udacity</div>
+    <div id="footer" class="col-md-12 centered">Thanks for visiting! &copy; 2014 Udacity</div>
   </div>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
