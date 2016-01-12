@@ -1,4 +1,8 @@
 {
+  "name": "frontend-nanodegree-mobile-potfolio",
+  "version": "1.0.0",
+  "description": "Front-End Nanodegree Mobile Portfolio",
+  "author": "Daniel M. Melo <hi@danielslab.com>",
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
     "babel-core": "^6.0.15",

@@ -108,8 +108,7 @@ gulp.task('scripts', () =>
       // Note: Since we are not using useref in the scripts build pipeline,
       //       you need to explicitly list your scripts here in the right order
       //       to be correctly concatenated
-      './app/js/main.js',
-      './app/js/perfmatters.js'
+      './app/views/js/main.js',
       // Other scripts
     ])
       .pipe($.newer('.tmp/js'))
@@ -122,7 +121,7 @@ gulp.task('scripts', () =>
       // Output files
       .pipe($.size({title: 'js'}))
       .pipe($.sourcemaps.write('.'))
-      .pipe(gulp.dest('dist/js'))
+      .pipe(gulp.dest('dist/views/js'))
 );
 
 // Scan your HTML for assets & optimize them
