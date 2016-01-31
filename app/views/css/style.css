@@ -56,9 +56,12 @@ form {
 
 .mover {
   position: fixed;
-  width: 256px;
+  width: 100px;
+  height: 98px;
   z-index: -1;
   opacity: 0.3;
+  background: url('../images/pizza-bg.png');
+  transform: translateZ(0);
 }
 
 #menu { 
