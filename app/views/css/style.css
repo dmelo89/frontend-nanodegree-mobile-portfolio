@@ -54,6 +54,13 @@ form {
   color: #ffe6c7;
 }
 
+.mover {
+  position: fixed;
+  width: 256px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
 #menu { 
   max-width: 434px;
   margin: 0 auto;
